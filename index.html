@@ -1,0 +1,1575 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECO-JET | Kanaltechnik in Kärnten</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Outfit:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --color-bg: #F8F9FA;
+  --color-surface: #FFFFFF;
+  --color-text: #1A202C;
+  --color-text-muted: #4A5568;
+  --color-accent: #00D084;
+  --color-trust: #0765C8;
+  --color-dark: #0F172A;
+
+  --font-heading: 'Outfit', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  --text-xs: clamp(0.75rem, 1.5vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 1.8vw, 1rem);
+  --text-base: clamp(1rem, 2vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 2.5vw, 1.375rem);
+  --text-xl: clamp(1.375rem, 3vw, 1.75rem);
+  --text-2xl: clamp(1.75rem, 4vw, 2.5rem);
+  --text-3xl: clamp(2.25rem, 5vw, 3.5rem);
+  --text-4xl: clamp(3rem, 7vw, 5rem);
+
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+  --space-32: 8rem;
+
+  --section-padding: clamp(4rem, 10vw, 8rem);
+  --container-width: 1280px;
+
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 500;
+  --z-modal: 1000;
+  --z-toast: 2000;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--color-text);
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+ul {
+  list-style: none;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--space-4);
+}
+
+/* Icons */
+[data-lucide] {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  line-height: 1;
+  pointer-events: none;
+  width: 1.25em;
+  height: 1.25em;
+}
+
+.icon-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0.875rem 1.75rem;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: var(--text-base);
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+  position: relative;
+  z-index: var(--z-raised);
+  text-align: center;
+  line-height: 1.2;
+}
+
+.btn-primary {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+}
+
+.btn-primary:hover {
+  background-color: #00b874;
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background-color: transparent;
+  border-color: var(--color-trust);
+  color: var(--color-trust);
+}
+
+.btn-outline:hover {
+  background-color: var(--color-trust);
+  color: var(--color-surface);
+  transform: translateY(-2px);
+}
+
+.btn-dark {
+  background-color: var(--color-text);
+  color: var(--color-surface);
+}
+
+.btn-dark:hover {
+  background-color: #000;
+  transform: translateY(-2px);
+}
+
+/* Skip Link */
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: var(--color-accent);
+  color: var(--color-text);
+  padding: 8px;
+  z-index: 9999;
+  font-weight: bold;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* Header & Navigation */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1001;
+  background-color: var(--color-surface);
+  transition: all 0.3s ease;
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.site-header.scrolled {
+  padding: var(--space-2) 0;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--color-text);
+  text-transform: lowercase;
+}
+
+.logo span {
+  color: var(--color-accent);
+}
+
+.desktop-nav {
+  display: none;
+}
+
+.header-actions {
+  display: none;
+}
+
+/* Mobile Nav Toggle */
+.nav-toggle {
+  position: absolute;
+  right: var(--space-4);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1002;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: var(--color-text);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.nav-toggle[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Overlay */
+.mobile-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background-color: var(--color-surface);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.mobile-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+.mobile-nav-links a {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  padding: 1rem;
+}
+
+.mobile-phone-btn {
+  margin-top: var(--space-8);
+  font-size: var(--text-lg);
+}
+
+@media (min-width: 1024px) {
+  .nav-toggle {
+    display: none;
+    pointer-events: none;
+  }
+  .desktop-nav {
+    display: flex;
+    gap: var(--space-8);
+    align-items: center;
+  }
+  .desktop-nav a {
+    font-weight: 500;
+    font-size: var(--text-sm);
+    color: var(--color-text);
+  }
+  .desktop-nav a:hover {
+    color: var(--color-trust);
+  }
+  .header-actions {
+    display: flex;
+    align-items: center;
+  }
+}
+
+/* Hero Section */
+.hero {
+  padding-top: calc(80px + var(--section-padding));
+  padding-bottom: var(--section-padding);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
+}
+
+.hero-content h1 {
+  font-size: var(--text-4xl);
+  margin-bottom: var(--space-6);
+  text-wrap: balance;
+}
+
+.hero-content p {
+  font-size: var(--text-xl);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-8);
+  max-width: 600px;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+}
+
+.hero-graphic {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-graphic img {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+/* Trust Section (Overlapping) */
+.trust-section {
+  background-color: var(--color-trust);
+  color: var(--color-surface);
+  padding: var(--section-padding) 0;
+  position: relative;
+  margin-top: var(--space-32);
+}
+
+.trust-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .trust-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.trust-content h2 {
+  color: var(--color-surface);
+  font-size: clamp(1.75rem, 5vw, 3.5rem);
+  margin-bottom: var(--space-6);
+  line-height: 1.2;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.trust-content p {
+  font-size: var(--text-lg);
+  opacity: 0.9;
+}
+
+.trust-image-wrapper {
+  position: relative;
+  height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+@media (min-width: 1024px) {
+  .trust-image-wrapper {
+    margin-top: calc(var(--section-padding) * -1.5);
+    height: 500px;
+  }
+}
+
+.trust-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Locations */
+.locations {
+  padding: var(--section-padding) 0;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-16);
+}
+
+.section-header h2 {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-4);
+}
+
+.locations-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-6);
+}
+
+@media (min-width: 768px) {
+  .locations-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.location-card {
+  background: var(--color-surface);
+  padding: var(--space-8);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02), 0 10px 15px rgba(0,0,0,0.03);
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.location-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.05), 0 20px 25px rgba(0,0,0,0.04);
+}
+
+.location-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  background: rgba(7, 101, 200, 0.1);
+  color: var(--color-trust);
+  border-radius: 50%;
+  margin-bottom: var(--space-4);
+}
+
+.location-card h3 {
+  font-size: var(--text-xl);
+  margin-bottom: var(--space-2);
+}
+
+.location-phone {
+  font-family: var(--font-heading);
+  font-size: var(--text-2xl);
+  font-weight: 700;
+  color: var(--color-text);
+  display: block;
+  margin-top: var(--space-4);
+}
+
+/* Services */
+.services {
+  padding: var(--section-padding) 0;
+  background-color: var(--color-surface);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-8);
+}
+
+@media (min-width: 640px) {
+  .services-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .services-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.service-card {
+  background: var(--color-bg);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+}
+
+.service-image {
+  height: 240px;
+  width: 100%;
+  background: linear-gradient(135deg, var(--color-trust) 0%, #0a4b8f 100%);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255,255,255,0.2);
+  overflow: hidden;
+}
+
+.service-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.service-content {
+  padding: var(--space-6);
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.service-content h3 {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-2);
+}
+
+.service-content p {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-4);
+  flex-grow: 1;
+}
+
+/* Recruiting Banner */
+.recruiting {
+  background-color: var(--color-accent);
+  color: var(--color-text);
+  padding: var(--space-16) 0;
+  text-align: center;
+}
+
+.recruiting h2 {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-4);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.recruiting p {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-8);
+  font-weight: 500;
+}
+
+/* Contact Section */
+.contact {
+  padding: var(--section-padding) 0;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+}
+
+@media (min-width: 1024px) {
+  .contact-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.contact-info h2 {
+  font-size: var(--text-3xl);
+  margin-bottom: var(--space-6);
+}
+
+.contact-info p {
+  font-size: var(--text-lg);
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-8);
+}
+
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-4);
+}
+
+.contact-item i {
+  color: var(--color-trust);
+  margin-top: 4px;
+}
+
+.contact-form-card {
+  background: var(--color-surface);
+  padding: var(--space-8);
+  border-radius: 16px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+}
+
+.form-group {
+  margin-bottom: var(--space-4);
+}
+
+.form-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 600;
+  margin-bottom: var(--space-2);
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid #E2E8F0;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  background: var(--color-bg);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--color-trust);
+  box-shadow: 0 0 0 3px rgba(7, 101, 200, 0.1);
+}
+
+textarea.form-control {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.form-checkbox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  margin-bottom: var(--space-6);
+}
+
+.form-checkbox input[type="checkbox"] {
+  margin-top: 4px;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--color-trust);
+}
+
+.form-checkbox label {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: 1.4;
+}
+
+/* Footer */
+.site-footer {
+  background-color: var(--color-dark);
+  color: #F1F5F9;
+  padding: clamp(4rem, 8vw, 7rem) 0 2rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr;
+  }
+}
+
+.footer-brand .logo {
+  color: var(--color-surface);
+  margin-bottom: var(--space-4);
+  display: inline-block;
+}
+
+.footer-brand p {
+  color: #94A3B8;
+  margin-bottom: var(--space-6);
+  max-width: 300px;
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-4);
+}
+
+.social-links a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  color: var(--color-surface);
+  transition: background 0.2s ease;
+}
+
+.social-links a:hover {
+  background: var(--color-trust);
+}
+
+.footer-heading {
+  font-size: var(--text-lg);
+  margin-bottom: var(--space-6);
+  color: var(--color-surface);
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer-links a, .footer-links button {
+  color: #94A3B8;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  text-align: left;
+  cursor: pointer;
+  padding: 0;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover, .footer-links button:hover {
+  color: var(--color-accent);
+}
+
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.footer-contact .icon-text {
+  color: #94A3B8;
+}
+
+.footer-bottom {
+  padding-top: var(--space-6);
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.footer-bottom p {
+  color: #64748B;
+  font-size: var(--text-sm);
+}
+
+.legal-links {
+  display: flex;
+  gap: var(--space-6);
+  justify-content: center;
+}
+
+.legal-links button {
+  background: none;
+  border: none;
+  color: #64748B;
+  font-family: inherit;
+  font-size: var(--text-sm);
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.legal-links button:hover {
+  color: var(--color-surface);
+}
+
+/* Modals */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  background: rgba(15, 23, 42, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.is-open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.modal-card {
+  background: var(--color-surface);
+  width: 100%;
+  max-width: 480px;
+  border-radius: 16px;
+  padding: 2.5rem;
+  position: relative;
+  transform: translateY(20px);
+  transition: transform 0.3s ease;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.modal-overlay.is-open .modal-card {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-text-muted);
+  padding: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.modal-close:hover {
+  color: var(--color-accent);
+}
+
+.modal-title {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--space-4);
+  padding-right: var(--space-8);
+}
+
+.modal-body {
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-6);
+}
+
+.modal-links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-top: var(--space-4);
+}
+
+.modal-links a {
+  color: var(--color-trust);
+  font-weight: 500;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* Cookie Banner */
+.cookie-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-surface);
+  padding: var(--space-4);
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+  z-index: var(--z-toast);
+  transform: translateY(100%);
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.cookie-banner.is-visible {
+  transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .cookie-banner {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-8);
+  }
+}
+
+.cookie-text {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  max-width: 800px;
+}
+
+.cookie-actions {
+  display: flex;
+  gap: var(--space-4);
+  flex-shrink: 0;
+}
+
+/* Scroll Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+</style>
+</head>
+<body>
+<!-- DEMO NOTICE BANNER - benedictjaros.com -->
+<style>
+#__demo_spacer{display:block;}
+#__demo_notice,#__demo_notice *{box-sizing:border-box;margin:0;padding:0;}
+#__demo_notice{
+  position:fixed;top:0;left:0;right:0;z-index:99999;
+  background:rgba(9,9,11,.97);
+  backdrop-filter:blur(14px) saturate(160%);
+  -webkit-backdrop-filter:blur(14px) saturate(160%);
+  border-bottom:1px solid rgba(255,255,255,.07);
+  font-family:system-ui,-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+}
+#__demo_inner{
+  max-width:1280px;margin:0 auto;
+  padding:0 44px 0 18px;min-height:38px;
+  display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+}
+#__demo_dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;background:#f5c842;box-shadow:0 0 7px rgba(245,200,66,.55);}
+#__demo_label{color:#f5c842;font-weight:700;font-size:10px;letter-spacing:.12em;text-transform:uppercase;flex-shrink:0;}
+#__demo_divider{color:rgba(255,255,255,.15);font-size:12px;flex-shrink:0;}
+#__demo_text{color:rgba(255,255,255,.45);font-size:11.5px;line-height:1.45;flex:1 1 160px;}
+#__demo_links{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+#__demo_links a{
+  color:rgba(255,255,255,.38);font-size:11px;text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.14);
+  transition:color .15s,border-color .15s;white-space:nowrap;
+}
+#__demo_links a:hover{color:rgba(255,255,255,.75);border-color:rgba(255,255,255,.4);}
+#__demo_link_sep{color:rgba(255,255,255,.15);font-size:10px;}
+#__demo_close{
+  position:absolute;right:0;top:0;bottom:0;width:40px;
+  background:none;border:none;cursor:pointer;
+  color:rgba(255,255,255,.28);font-size:16px;line-height:1;
+  display:flex;align-items:center;justify-content:center;
+  transition:color .15s;
+}
+#__demo_close:hover{color:rgba(255,255,255,.7);}
+@media(max-width:560px){
+  #__demo_inner{padding:7px 44px 7px 14px;gap:6px;}
+  #__demo_text{font-size:11px;flex:1 1 100%;order:3;}
+  #__demo_dot,#__demo_label{order:1;}
+  #__demo_divider{order:2;}
+  #__demo_links{order:4;}
+}
+</style>
+<div id="__demo_spacer"></div>
+<div id="__demo_notice" role="banner" aria-label="Demo notice">
+  <div id="__demo_inner">
+    <span id="__demo_dot"></span>
+    <span id="__demo_label">Demo</span>
+    <span id="__demo_divider">/</span>
+    <span id="__demo_text">Unofficial remake &mdash; not the real website. All content &amp; trademarks belong to their owners.</span>
+    <div id="__demo_links">
+      <a href="https://benedictjaros.com/impressum" target="_blank" rel="noopener noreferrer">Impressum</a>
+      <span id="__demo_link_sep">&middot;</span>
+      <a href="https://benedictjaros.com/datenschutz" target="_blank" rel="noopener noreferrer">Datenschutz</a>
+    </div>
+  </div>
+  <button id="__demo_close" aria-label="Close demo notice">&#x2715;</button>
+</div>
+<script>
+(function () {
+  var spacer = document.getElementById('__demo_spacer');
+  var b = document.getElementById('__demo_notice');
+  var x = document.getElementById('__demo_close');
+  if (!b || !spacer) return;
+  function sync() { spacer.style.height = b.offsetHeight + 'px'; }
+  function hide() {
+    b.style.display = 'none'; spacer.style.height = '0';
+    try { sessionStorage.setItem('__demo_closed', '1'); } catch (e) {}
+  }
+  try { if (sessionStorage.getItem('__demo_closed')) { b.style.display = 'none'; spacer.style.height = '0'; return; } } catch (e) {}
+  sync();
+  window.addEventListener('resize', function () { if (b.style.display !== 'none') sync(); });
+  if (x) x.addEventListener('click', hide);
+}());
+</script>
+
+
+<a href="#main" class="skip-link">Zum Hauptinhalt springen</a>
+
+<header class="site-header" id="header">
+  <div class="container header-inner">
+    <a href="#" class="logo">eco-jet</a>
+    
+    <nav class="desktop-nav">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#standorte">Standorte</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+
+    <div class="header-actions">
+      <a href="tel:+43463264064" class="btn btn-primary">
+        <i data-lucide="phone"></i>
+        +43 463 264 064
+      </a>
+    </div>
+
+    <button class="nav-toggle" aria-expanded="false" aria-label="Menü öffnen" id="navToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<div class="mobile-overlay" id="mobileOverlay">
+  <nav class="mobile-nav-links">
+    <a href="#leistungen" class="mobile-link">Leistungen</a>
+    <a href="#standorte" class="mobile-link">Standorte</a>
+    <a href="#kontakt" class="mobile-link">Kontakt</a>
+    <button class="btn btn-outline mobile-link" data-modal="jobs">Karriere</button>
+  </nav>
+  <a href="tel:+43463264064" class="btn btn-primary mobile-phone-btn">
+    <i data-lucide="phone"></i>
+    +43 463 264 064
+  </a>
+</div>
+
+<main id="main">
+  
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <h1 class="reveal">Willkommen bei ECO-JET – Ihrem Partner für Kanaltechnik in Kärnten!</h1>
+        <p class="reveal" style="--i:1">Frisch. Frech. Sauber! Schnelle und zuverlässige Hilfe bei akuten Rohr- und Kanalproblemen.</p>
+        <div class="hero-actions reveal" style="--i:2">
+          <a href="tel:+43463264064" class="btn btn-primary">
+            Soforthilfe rufen!
+            <i data-lucide="arrow-right"></i>
+          </a>
+          <a href="#leistungen" class="btn btn-outline">Leistungen ansehen</a>
+        </div>
+      </div>
+      <div class="hero-graphic reveal" style="--i:3">
+        <img src="https://www.eco-jet.at/wp-content/uploads/2024/11/Zeichenflaeche-1Geko-gruen.svg" alt="Eco-Jet Gecko Maskottchen" width="500" height="500">
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-section">
+    <div class="container trust-grid">
+      <div class="trust-content reveal">
+        <h2>"Wenn es plötzlich brenzlig wird, zählt jede Minute..."</h2>
+        <p>Wir sind rund um die Uhr für Sie da. Mit modernster Technik und einem erfahrenen Team lösen wir jedes Kanalproblem schnell, sauber und nachhaltig.</p>
+        <p style="margin-top: 1rem; font-weight: 600;">— Robert Bradaric, Geschäftsführer</p>
+      </div>
+      <div class="trust-image-wrapper reveal" style="--i:1">
+        <img src="https://www.eco-jet.at/wp-content/uploads/2024/11/Robert-Startseite.jpg" alt="Robert Bradaric" loading="lazy">
+      </div>
+    </div>
+  </section>
+
+  <section id="standorte" class="locations">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Kurze Wege. Schnelle Hilfe.</h2>
+        <p>Unsere Standorte in Kärnten garantieren kurze Anfahrtszeiten.</p>
+      </div>
+      <div class="locations-grid">
+        <div class="location-card reveal" style="--i:0">
+          <div class="location-icon">
+            <i data-lucide="map-pin"></i>
+          </div>
+          <h3>Klagenfurt Ebenthal</h3>
+          <p class="text-muted">Zentrale</p>
+          <a href="tel:+43463264064" class="location-phone">+43 463 / 264 064</a>
+        </div>
+        <div class="location-card reveal" style="--i:1">
+          <div class="location-icon">
+            <i data-lucide="map-pin"></i>
+          </div>
+          <h3>Villach Draustadt</h3>
+          <p class="text-muted">Stützpunkt</p>
+          <a href="tel:+43424238888" class="location-phone">+43 4242 / 3 8888</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="leistungen" class="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Unsere Leistungen</h2>
+        <p>Professionelle Kanaltechnik für private und gewerbliche Kunden.</p>
+      </div>
+      <div class="services-grid">
+        
+        <div class="service-card reveal" style="--i:0">
+          <div class="service-image">
+            <img src="https://www.eco-jet.at/wp-content/uploads/2024/11/Kanalreinigung-1.jpg" alt="Rohr- und Kanalreinigung" loading="lazy">
+          </div>
+          <div class="service-content">
+            <h3>Rohr- und Kanalreinigung</h3>
+            <p>Beseitigung von Verstopfungen und Ablagerungen mit Hochdruck- und elektromechanischen Verfahren.</p>
+          </div>
+        </div>
+
+        <div class="service-card reveal" style="--i:1">
+          <div class="service-image">
+            <img src="https://www.eco-jet.at/wp-content/uploads/2024/11/TV-Inspektion.jpg" alt="TV-Inspektion" loading="lazy">
+          </div>
+          <div class="service-content">
+            <h3>TV-Inspektion</h3>
+            <p>Zustandserfassung von Rohren und Kanälen mittels modernster Kameratechnik zur Schadensortung.</p>
+          </div>
+        </div>
+
+        <div class="service-card reveal" style="--i:2">
+          <div class="service-image">
+            <img src="https://www.eco-jet.at/wp-content/uploads/2024/11/Kanalsanierung.jpg" alt="Kanalsanierung" loading="lazy">
+          </div>
+          <div class="service-content">
+            <h3>Kanalsanierung</h3>
+            <p>Grabenlose Sanierung von defekten Rohren durch Inliner- und Kurzliner-Verfahren.</p>
+          </div>
+        </div>
+
+        <div class="service-card reveal" style="--i:3">
+          <div class="service-image">
+            <i data-lucide="shield-check" style="width: 48px; height: 48px;"></i>
+          </div>
+          <div class="service-content">
+            <h3>Dichtheitsprüfung</h3>
+            <p>Überprüfung von Abwassersystemen auf Dichtheit gemäß den gesetzlichen Vorgaben.</p>
+          </div>
+        </div>
+
+        <div class="service-card reveal" style="--i:4">
+          <div class="service-image">
+            <i data-lucide="truck" style="width: 48px; height: 48px;"></i>
+          </div>
+          <div class="service-content">
+            <h3>Saugarbeiten</h3>
+            <p>Abpumpen und fachgerechte Entsorgung von Schlamm, Wasser und Fäkalien.</p>
+          </div>
+        </div>
+
+        <div class="service-card reveal" style="--i:5">
+          <div class="service-image">
+            <i data-lucide="filter" style="width: 48px; height: 48px;"></i>
+          </div>
+          <div class="service-content">
+            <h3>Abscheideranlagen</h3>
+            <p>Wartung, Entleerung und Reinigung von Fett- und Ölabscheidern.</p>
+          </div>
+        </div>
+
+        <div class="service-card reveal" style="--i:6">
+          <div class="service-image">
+            <i data-lucide="scissors" style="width: 48px; height: 48px;"></i>
+          </div>
+          <div class="service-content">
+            <h3>Fräsarbeiten</h3>
+            <p>Entfernung von harten Ablagerungen, Wurzeln oder Betonresten im Kanal.</p>
+          </div>
+        </div>
+
+        <div class="service-card reveal" style="--i:7">
+          <div class="service-image" style="background: var(--color-accent); color: var(--color-text);">
+            <i data-lucide="clock" style="width: 48px; height: 48px;"></i>
+          </div>
+          <div class="service-content">
+            <h3>24/7 Notdienst</h3>
+            <p>Rund um die Uhr erreichbar für akute Notfälle an 365 Tagen im Jahr.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="recruiting">
+    <div class="container reveal">
+      <h2>WIR SUCHEN VERSTÄRKUNG. JETZT.</h2>
+      <p>Du packst an, wenn andere wegschauen? Werde Teil unseres Teams.</p>
+      <button class="btn btn-dark" data-modal="jobs">Offene Stellen ansehen!</button>
+    </div>
+  </section>
+
+  <section id="kontakt" class="contact">
+    <div class="container contact-grid">
+      <div class="contact-info reveal">
+        <h2>Lassen Sie uns Ihr Kanalproblem lösen – schnell und zuverlässig!</h2>
+        <p>Kontaktieren Sie uns für ein unverbindliches Angebot oder rufen Sie direkt unseren Notdienst an.</p>
+        
+        <div class="contact-details">
+          <div class="contact-item">
+            <i data-lucide="phone"></i>
+            <div>
+              <strong>Klagenfurt:</strong> <br>
+              <a href="tel:+43463264064">+43 463 / 264 064</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i data-lucide="phone"></i>
+            <div>
+              <strong>Villach:</strong> <br>
+              <a href="tel:+43424238888">+43 4242 / 3 8888</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i data-lucide="mail"></i>
+            <div>
+              <strong>Email:</strong> <br>
+              <a href="mailto:office@eco-jet.at">office@eco-jet.at</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form-wrapper reveal" style="--i:1">
+        <form class="contact-form-card" id="contactForm">
+          <div class="form-group">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" id="name" class="form-control" required placeholder="Ihr vollständiger Name">
+          </div>
+          <div class="form-group">
+            <label for="email" class="form-label">E-Mail</label>
+            <input type="email" id="email" class="form-control" required placeholder="ihre.email@beispiel.at">
+          </div>
+          <div class="form-group">
+            <label for="phone" class="form-label">Telefon</label>
+            <input type="tel" id="phone" class="form-control" placeholder="Für Rückfragen">
+          </div>
+          <div class="form-group">
+            <label for="message" class="form-label">Nachricht</label>
+            <textarea id="message" class="form-control" required placeholder="Wie können wir Ihnen helfen?"></textarea>
+          </div>
+          <div class="form-checkbox">
+            <input type="checkbox" id="gdpr" required>
+            <label for="gdpr">Ich stimme der Datenschutzerklärung zu und willige ein, dass meine Daten zur Bearbeitung meiner Anfrage gespeichert werden. [Pflichtfeld]</label>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%;" id="submitBtn" disabled>
+            Nachricht senden
+            <i data-lucide="send"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <span class="logo">eco-jet</span>
+        <p>Ihr zuverlässiger Partner für Kanaltechnik, Rohrreinigung und Sanierung in Kärnten. 24/7 Notdienst.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+          <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+        </div>
+      </div>
+      
+      <div>
+        <h4 class="footer-heading">Unternehmen</h4>
+        <div class="footer-links">
+          <a href="#leistungen">Leistungen</a>
+          <a href="#standorte">Standorte</a>
+          <button data-modal="jobs">Karriere</button>
+          <a href="#kontakt">Kontakt</a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="footer-heading">Kontakt</h4>
+        <div class="footer-contact">
+          <span class="icon-text"><i data-lucide="map-pin"></i> Klagenfurt & Villach</span>
+          <span class="icon-text"><i data-lucide="phone"></i> +43 463 / 264 064</span>
+          <span class="icon-text"><i data-lucide="mail"></i> office@eco-jet.at</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2026 ECO-JET — All original content, images & trademarks are property of their respective owners. Website rebuilt by Benedict Jaros.</p>
+      <div class="legal-links">
+        <button data-modal="demo">Impressum</button>
+        <button data-modal="demo">Datenschutz</button>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Placeholder Modal: Jobs -->
+<div class="modal-overlay" id="modal-jobs" role="dialog" aria-modal="true" aria-labelledby="modal-jobs-title">
+  <div class="modal-card">
+    <button class="modal-close" aria-label="Schließen" data-close-modal>
+      <i data-lucide="x"></i>
+    </button>
+    <h3 class="modal-title" id="modal-jobs-title">Offene Stellen</h3>
+    <p class="modal-body">This feature will be live once the website is launched and configured. Contact us in the meantime — we'd love to hear from you.</p>
+    <button class="btn btn-primary" data-close-modal>Verstanden</button>
+  </div>
+</div>
+
+<!-- Demo Notice Modal -->
+<div class="modal-overlay" id="modal-demo" role="dialog" aria-modal="true" aria-labelledby="modal-demo-title">
+  <div class="modal-card">
+    <button class="modal-close" aria-label="Schließen" data-close-modal>
+      <i data-lucide="x"></i>
+    </button>
+    <h3 class="modal-title" id="modal-demo-title">Rechtliche Hinweise</h3>
+    <p class="modal-body">Diese Website ist ein Demo-Remake und wurde nicht von oder für das Unternehmen erstellt. Die Inhalte dienen ausschließlich Demonstrationszwecken. Für unsere eigenen rechtlichen Informationen:</p>
+    <div class="modal-links">
+      <a href="https://benedictjaros.com/impressum" target="_blank">Impressum</a>
+      <a href="https://benedictjaros.com/datenschutz" target="_blank">Datenschutz</a>
+    </div>
+  </div>
+</div>
+
+<!-- Cookie Banner -->
+<div class="cookie-banner" id="cookieBanner">
+  <p class="cookie-text">Wir verwenden Cookies, um Ihre Erfahrung auf unserer Website zu verbessern. Durch die weitere Nutzung der Website stimmen Sie der Verwendung von Cookies zu.</p>
+  <div class="cookie-actions">
+    <button class="btn btn-outline" id="cookieDecline" style="padding: 0.5rem 1rem; font-size: var(--text-sm);">Ablehnen</button>
+    <button class="btn btn-primary" id="cookieAccept" style="padding: 0.5rem 1rem; font-size: var(--text-sm);">Akzeptieren</button>
+  </div>
+</div>
+
+<script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+<script>
+  // Initialize Icons
+  lucide.createIcons();
+
+  // Sticky Header
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header.classList.add('scrolled');
+    } else {
+      header.classList.remove('scrolled');
+    }
+  });
+
+  // Mobile Navigation
+  const navToggle = document.getElementById('navToggle');
+  const mobileOverlay = document.getElementById('mobileOverlay');
+  const mobileLinks = document.querySelectorAll('.mobile-link');
+
+  function toggleMenu() {
+    const isExpanded = navToggle.getAttribute('aria-expanded') === 'true';
+    navToggle.setAttribute('aria-expanded', !isExpanded);
+    mobileOverlay.classList.toggle('is-open');
+    document.body.style.overflow = isExpanded ? '' : 'hidden';
+  }
+
+  navToggle.addEventListener('click', toggleMenu);
+  
+  mobileLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      if(mobileOverlay.classList.contains('is-open')) toggleMenu();
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileOverlay.classList.contains('is-open')) {
+      toggleMenu();
+    }
+  });
+
+  // Scroll Reveal
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    root: null,
+    threshold: 0.12,
+    rootMargin: '0px 0px -50px 0px'
+  });
+
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  // Modals
+  const modalTriggers = document.querySelectorAll('[data-modal]');
+  const closeButtons = document.querySelectorAll('[data-close-modal]');
+  const overlays = document.querySelectorAll('.modal-overlay');
+
+  function openModal(modalId) {
+    const modal = document.getElementById(`modal-${modalId}`);
+    if (modal) {
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function closeAllModals() {
+    overlays.forEach(overlay => overlay.classList.remove('is-open'));
+    document.body.style.overflow = '';
+  }
+
+  modalTriggers.forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      openModal(trigger.dataset.modal);
+    });
+  });
+
+  closeButtons.forEach(btn => {
+    btn.addEventListener('click', closeAllModals);
+  });
+
+  overlays.forEach(overlay => {
+    overlay.addEventListener('click', (e) => {
+      if (e.target === overlay) closeAllModals();
+    });
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeAllModals();
+  });
+
+  // Form Validation
+  const gdprCheckbox = document.getElementById('gdpr');
+  const submitBtn = document.getElementById('submitBtn');
+  const contactForm = document.getElementById('contactForm');
+
+  if(gdprCheckbox && submitBtn) {
+    gdprCheckbox.addEventListener('change', (e) => {
+      submitBtn.disabled = !e.target.checked;
+    });
+  }
+
+  if(contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      // Simulate form submission
+      const originalText = submitBtn.innerHTML;
+      submitBtn.innerHTML = 'Wird gesendet...';
+      setTimeout(() => {
+        submitBtn.innerHTML = 'Nachricht gesendet <i data-lucide="check"></i>';
+        submitBtn.style.backgroundColor = 'var(--color-trust)';
+        lucide.createIcons();
+        contactForm.reset();
+        submitBtn.disabled = true;
+        setTimeout(() => {
+          submitBtn.innerHTML = originalText;
+          submitBtn.style.backgroundColor = '';
+          lucide.createIcons();
+        }, 3000);
+      }, 1500);
+    });
+  }
+
+  // Cookie Banner
+  const cookieBanner = document.getElementById('cookieBanner');
+  const btnAccept = document.getElementById('cookieAccept');
+  const btnDecline = document.getElementById('cookieDecline');
+
+  if (!localStorage.getItem('cookie_consent')) {
+    setTimeout(() => {
+      cookieBanner.classList.add('is-visible');
+    }, 1000);
+  }
+
+  function handleConsent(choice) {
+    localStorage.setItem('cookie_consent', choice);
+    cookieBanner.classList.remove('is-visible');
+  }
+
+  btnAccept.addEventListener('click', () => handleConsent('accepted'));
+  btnDecline.addEventListener('click', () => handleConsent('declined'));
+
+</script>
+</body>
+</html>
